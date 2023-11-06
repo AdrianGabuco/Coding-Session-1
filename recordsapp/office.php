@@ -19,6 +19,25 @@
 </head>
 
 <body>
+<?php
+    require('config/config.php');
+    require('config/db.php');
+
+    //Create Query
+    $query = 'SELECT * FROM office ORDER BY name';
+
+    // Get the result
+    $result = mysqli_query($conn, $query);
+    
+    // Fetch the data
+    $offices = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+    // Free result
+    mysqli_free_result($result);
+
+    // Close the connection
+    mysqli_close($conn);
+?>
     <div class="wrapper">
         <div class="sidebar" data-image="../assets/img/sidebar-5.jpg">
             <!--
@@ -128,6 +147,43 @@
             <div class="content">
                 <div class="container-fluid">
                     <div class="section">
+                    </div>
+                    <div class="row">
+                    <div class="col-md-12">
+                            <div class="card strpied-tabled-with-hover">
+                                <div class="card-header ">
+                                    <h4 class="card-title">Striped Table with Hover</h4>
+                                    <p class="card-category">Here is a subtitle for this table</p>
+                                </div>
+                                <div class="card-body table-full-width table-responsive">
+                                    <table class="table table-hover table-striped">
+                                        <thead>
+                                            <th>Name</th>
+                                            <th>Contact Number</th>
+                                            <th>Email</th>
+                                            <th>Address</th>
+                                            <th>City</th>
+                                            <th>Country</th>
+                                            <th>Postal</th>
+                                        </thead>
+                                        <tbody>
+                                            <?php foreach($offices as $office): ?>
+                                            <tr>
+                                                <td><?php echo $office['name']?></td>
+                                                <td><?php echo $office['contactnum']?></td>
+                                                <td><?php echo $office['email']?></td>
+                                                <td><?php echo $office['address']?></td>
+                                                <td><?php echo $office['city']?></td>
+                                                <td><?php echo $office['country']?></td>
+                                                <td><?php echo $office['postal']?></td>
+                                            </tr>
+                                            <?php endforeach ?>
+                                          
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
