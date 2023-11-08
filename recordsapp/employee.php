@@ -41,13 +41,13 @@
     $page_first_result = ($page - 1) * $result_per_page;
 
     //Create Query
-    $query = 'SELECT employee.lastname, employee.firstname, employee.address, office.name as office_name FROM employee, office WHERE employee.office_id = office.id ORDER BY employee.lastname LIMIT '. $page_first_result . ',' . $result_per_page;
+    $query = 'SELECT employee.id, employee.lastname, employee.firstname, employee.address, office.name as office_name FROM employee, office WHERE employee.office_id = office.id ORDER BY employee.lastname LIMIT '. $page_first_result . ',' . $result_per_page;
 
     // Get the result
     $result = mysqli_query($conn, $query);
     
     // Fetch the data
-    $offices = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    $employees = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
     // Free result
     mysqli_free_result($result);
@@ -81,7 +81,6 @@
                                 </div>
                                 <div class="card-header ">
                                     <h4 class="card-title">Employee</h4>
-                                    <p class="card-category">Information</p>
                                 </div>
                                 <div class="card-body table-full-width table-responsive">
                                     <table class="table table-hover table-striped">
@@ -90,14 +89,20 @@
                                             <th>First name</th>
                                             <th>Address</th>
                                             <th>Office</th>
+                                            <th>Action</th>
                                         </thead>
                                         <tbody>
-                                            <?php foreach($offices as $office): ?>
+                                            <?php foreach($employees as $employee): ?>
                                             <tr>
-                                                <td><?php echo $office['lastname']?></td>
-                                                <td><?php echo $office['firstname']?></td>
-                                                <td><?php echo $office['address']?></td>
-                                                <td><?php echo $office['office_name']?></td>
+                                                <td><?php echo $employee['lastname']?></td>
+                                                <td><?php echo $employee['firstname']?></td>
+                                                <td><?php echo $employee['address']?></td>
+                                                <td><?php echo $employee['office_name']?></td>
+                                                <td>
+                                                    <a href="employee-edit.php?id=<?php echo $employee['id'];?>">
+                                                    <button type="submit" class="btn btn-warning btn-fill pull-right">Edit</button>
+                                                    </a>
+                                                </td>
                                             </tr>
                                             <?php endforeach ?>
                                           

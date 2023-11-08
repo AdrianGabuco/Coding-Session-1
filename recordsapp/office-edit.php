@@ -21,7 +21,7 @@
 <body>
 
 <?php 
-    require('config/config.php');
+    require_once('config/config.php');
     require('config/db.php');
 
     //Get value sent over
@@ -61,7 +61,7 @@
         <div class="main-panel">
             <?php include('includes/navbar.php'); ?>
 <?php
-    require('config/config.php');
+    require_once('config/config.php');
     require('config/db.php');
 
     //Check if submitted

@@ -79,8 +79,7 @@
                                     </a>
                                 </div>
                                 <div class="card-header ">
-                                    <h4 class="card-title">Office</h4>
-                                    <p class="card-category">Information</p>
+                                    <h4 class="card-title">Offices</h4>
                                 </div>
                                 <div class="card-body table-full-width table-responsive">
                                     <table class="table table-hover table-striped">

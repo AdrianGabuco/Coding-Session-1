@@ -23,10 +23,4 @@
                         </a>
                     </li>
 
-                    <li class="nav-item active active-pro">
-                        <a class="nav-link active" href="javascript:;">
-                            <i class="nc-icon nc-alien-33"></i>
-                            <p>Upgrade plan</p>
-                        </a>
-                    </li>
                 

@@ -107,8 +107,7 @@
                                     </a>
                                 </div>
                                 <div class="card-header ">
-                                    <h4 class="card-title">Transaction</h4>
-                                    <p class="card-category">Information</p>
+                                    <h4 class="card-title">Transactions</h4>
                                 </div>
                                 <div class="card-body table-full-width table-responsive">
                                     <table class="table table-hover table-striped">
@@ -121,7 +120,7 @@
                                             <th>Remarks</th>
                                         </thead>
                                         <tbody>
-                                            <?php foreach($offices as $office): ?>
+                                            <?php foreach($transactions as $transaction): ?>
                                             <tr>
                                                 <td><?php echo $transaction['datelog']?></td>
                                                 <td><?php echo $transaction['documentcode']?></td>
