@@ -27,7 +27,7 @@
     $result_per_page = 10;
 
     //find total number of results/rows stored in the database
-    $query = 'SELECT * FROM transaction';
+    $query = 'SELECT * FROM employee';
     $result = mysqli_query($conn, $query);
     $number_of_results = mysqli_num_rows($result);
 
@@ -109,7 +109,7 @@
                     </div>
                     <?php 
                         for($page=1;$page <= $number_of_pages; $page++){
-                            echo '<a href="transaction.php?page=' . $page . '">' . $page . '</a>';
+                            echo '<a href="employee.php?page=' . $page . '">' . $page . '</a>';
                         }
                     ?>
                 </div>

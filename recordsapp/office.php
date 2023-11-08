@@ -27,7 +27,7 @@
     $result_per_page = 10;
 
     //find total number of results/rows stored in the database
-    $query = 'SELECT * FROM transaction';
+    $query = 'SELECT * FROM office';
     $result = mysqli_query($conn, $query);
     $number_of_results = mysqli_num_rows($result);
 
@@ -92,6 +92,7 @@
                                             <th>City</th>
                                             <th>Country</th>
                                             <th>Postal</th>
+                                            <th>Action</th>
                                         </thead>
                                         <tbody>
                                             <?php foreach($offices as $office): ?>
@@ -103,6 +104,11 @@
                                                 <td><?php echo $office['city']?></td>
                                                 <td><?php echo $office['country']?></td>
                                                 <td><?php echo $office['postal']?></td>
+                                                <td>
+                                                    <a href="office-edit.php?id=<?php echo $office['id'];?>">
+                                                    <button type="submit" class="btn btn-warning btn-fill pull-right">Edit</button>
+                                                    </a>
+                                                </td>
                                             </tr>
                                             <?php endforeach ?>
                                           
@@ -114,7 +120,7 @@
                     </div>
                     <?php 
                         for($page=1;$page <= $number_of_pages; $page++){
-                            echo '<a href="transaction.php?page=' . $page . '">' . $page . '</a>';
+                            echo '<a href="office.php?page=' . $page . '">' . $page . '</a>';
                         }
                     ?>
                 </div>
