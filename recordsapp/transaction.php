@@ -23,6 +23,8 @@
     require('config/config.php');
     require('config/db.php');
 
+    $search = $_GET['search'] ?? '';
+
     //define total number of results you want per page
     $result_per_page = 10;
 
@@ -39,10 +41,28 @@
 
     //Determine the sql LIMIT starting number for the results on the display page
     $page_first_result = ($page - 1) * $result_per_page; 
-    
+
     //Create Query
-    $query = 'SELECT transaction.datelog, transaction.documentcode, transaction.action, office.name as office_name, CONCAT(employee.lastname, ",", employee.firstname)as employee_fullname, transaction.remarks FROM employee, office, transaction 
-    WHERE transaction.employee_id = employee.id and transaction.office_id = office.id LIMIT '. $page_first_result . ',' . $result_per_page;
+    $query = 'SELECT transaction.datelog, transaction.documentcode, transaction.action, office.name as office_name, CONCAT(employee.lastname, ", ", employee.firstname) as employee_fullname, transaction.remarks FROM employee, office, transaction WHERE transaction.employee_id = employee.id and transaction.office_id = office.id';
+
+    // Check if the user provided a search input
+    if (!empty($search)) {
+        // Construct the WHERE clause to filter results
+        $whereClause = " AND (
+            transaction.datelog LIKE '%$search%' OR
+            transaction.documentcode LIKE '%$search%' OR
+            transaction.action LIKE '%$search%' OR
+            office.name LIKE '%$search%' OR
+            CONCAT(employee.lastname, ',', employee.firstname) LIKE '%$search%' OR
+            transaction.remarks LIKE '%$search%'
+        )";
+    
+        // Append the WHERE clause to the base query
+        $query .= $whereClause;
+    }
+    
+    // Add the LIMIT clause for pagination
+    $query .= ' LIMIT ' . $page_first_result . ',' . $result_per_page;
 
     // Get the result
     $result = mysqli_query($conn, $query);
@@ -75,6 +95,12 @@
                     <div class="col-md-12">
                             <div class="card strpied-tabled-with-hover">
                             <br/>
+                                <div class="col-md-12">
+                                    <form action="transaction.php" method="GET">
+                                        <input type="text" name="search" />
+                                        <input type="submit" value="Search" class="btn btn-info btn-fill" />
+                                    </form>
+                                </div>
                                 <div class="col-md-12">
                                     <a href="transaction-add.php">
                                         <button type="submit" class="btn btn-info btn-fill pull-right">Add New Transaction</button>
