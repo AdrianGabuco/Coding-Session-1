@@ -23,8 +23,25 @@
     require('config/config.php');
     require('config/db.php');
 
+    //define total number of results you want per page
+    $result_per_page = 10;
+
+    //find total number of results/rows stored in the database
+    $query = 'SELECT * FROM transaction';
+    $result = mysqli_query($conn, $query);
+    $number_of_results = mysqli_num_rows($result);
+
+    //determine the total number of pages available
+    $number_of_pages = ceil($number_of_results / $result_per_page);
+
+    //determine which page number visitor is currently on
+    $page = isset($_GET['page']) ? $_GET['page'] : 1;
+
+    //Determine the sql LIMIT starting number for the results on the display page
+    $page_first_result = ($page - 1) * $result_per_page; 
+
     //Create Query
-    $query = 'SELECT * FROM office ORDER BY name';
+    $query = 'SELECT * FROM office ORDER BY name LIMIT '. $page_first_result . ',' . $result_per_page;
 
     // Get the result
     $result = mysqli_query($conn, $query);
@@ -95,6 +112,11 @@
                             </div>
                         </div>
                     </div>
+                    <?php 
+                        for($page=1;$page <= $number_of_pages; $page++){
+                            echo '<a href="transaction.php?page=' . $page . '">' . $page . '</a>';
+                        }
+                    ?>
                 </div>
             </div>
             <footer class="footer">
