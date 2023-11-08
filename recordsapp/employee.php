@@ -24,7 +24,7 @@
     require('config/db.php');
 
     //Create Query
-    $query = 'SELECT employee.lastname, employee.firstname, employee.address, office.name as office_name FROM employee, office WHERE employee.office_id = office.id';
+    $query = 'SELECT employee.lastname, employee.firstname, employee.address, office.name as office_name FROM employee, office WHERE employee.office_id = office.id ORDER BY employee.lastname';
 
     // Get the result
     $result = mysqli_query($conn, $query);
@@ -56,6 +56,12 @@
                     <div class="row">
                     <div class="col-md-12">
                             <div class="card strpied-tabled-with-hover">
+                            <br/>
+                                <div class="col-md-12">
+                                    <a href="employee-add.php">
+                                        <button type="submit" class="btn btn-info btn-fill pull-right">Add New Employee</button>
+                                    </a>
+                                </div>
                                 <div class="card-header ">
                                     <h4 class="card-title">Employee</h4>
                                     <p class="card-category">Information</p>
